@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body style="background-color: #000; color: #fff;">
+  <ul class="language">
+    <li>JavaScript</li>
+  </ul>
+</body>
+<script>
+  // 🚫 Not the best way (uses innerHTML — can be unsafe or inefficient)
+  function addLanguage(language) {
+    const li = document.createElement("li");
+    li.innerHTML = language;
+    document.querySelector(".language").appendChild(li);
+  }
+
+  addLanguage("HTML");
+  addLanguage("CSS");
+
+  // ✅ Better way: use createTextNode to prevent unwanted parsing or injection
+  function addOptimizedLanguage(language) {
+    const li = document.createElement("li");
+    const textNode = document.createTextNode(language);
+    li.appendChild(textNode);
+    document.querySelector(".language").appendChild(li);
+  }
+
+  addOptimizedLanguage("TypeScript");
+
+  // ✏️ Edit element at specific index
+  function editLanguage(newText, index) {
+    const targetLi = document.querySelector(`li:nth-child(${index})`);
+    if (targetLi) {
+      const updatedLi = document.createElement("li");
+      updatedLi.textContent = newText;
+      targetLi.replaceWith(updatedLi);
+    }
+  }
+
+  editLanguage("Next.js", 2);
+
+  // ❌ Remove element at specific index
+  function removeLanguage(index) {
+    const targetLi = document.querySelector(`li:nth-child(${index})`);
+    if (targetLi) targetLi.remove();
+  }
+
+  removeLanguage(2);
+
+  // 🗑️ Remove the last <li> in the list
+  function removeLastChild() {
+    const lastLi = document.querySelector("li:last-child");
+    if (lastLi) lastLi.remove();
+  }
+
+  removeLastChild();
+</script>
+</html>
