@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    let interval = null;
+    const startButton = document.getElementById('start');
+    const stopButton = document.getElementById('stop');
+    function generateRandomColor() { return '#' + Math.floor(Math.random()*16777215).toString(16); }
+    
+    function startInterval() {
+        interval = setInterval(() => { document.body.style.backgroundColor = generateRandomColor() }, 500);
+    }
+
+    function stopInterval() {
+        clearInterval(interval);
+    }
+
+    startButton.addEventListener('click', startInterval);
+    stopButton.addEventListener('click', stopInterval);
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Press Display</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .key-display {
+            font-size: 2rem;
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            min-width: 200px;
+        }
+
+        .key-info {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .key-code {
+            font-size: 1.5rem;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="key-display">
+            <div class="key-info">Press any key</div>
+            <div class="key-code"></div>
+        </div>
+    </div>
+
+    <script>
+        const keyDisplay = document.querySelector('.key-info');
+        const keyCodeDisplay = document.querySelector('.key-code');
+
+        document.addEventListener('keydown', (event) => {
+            if(event.key === ' ') {
+                keyDisplay.textContent = 'Space';
+                keyCodeDisplay.textContent = `Key Code: ${event.keyCode}`;
+            } else {
+                keyDisplay.textContent = event.key;
+                keyCodeDisplay.textContent = `Key Code: ${event.keyCode}`;
+            }
+        });
+
+        document.addEventListener('keyup', (event) => {
+            keyDisplay.textContent = 'Press any key';
+            keyCodeDisplay.textContent = '';
+        });
+    </script>
+</body>
+</html>

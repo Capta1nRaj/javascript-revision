@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htnml Events </title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+<script>
+    // 📌 BEST PRACTICE: Use `addEventListener` instead of directly setting `onclick`
+    // Reason: It's more flexible, allows multiple listeners, and works better in modular code
+
+    // ❌ NOT RECOMMENDED (direct method)
+    // document.getElementById('owl').onclick = () => {
+    //     alert('clicked');
+    // }
+
+    // ✅ RECOMMENDED: Adding an event listener the modern way
+    // const owl = document.getElementById('owl');
+    // owl.addEventListener('click', () => {
+    //     alert('Owl image clicked!');
+    // }, false);
+
+    // 📌 Event Propagation:
+    // `false` = Bubbling phase (default), `true` = Capturing phase
+    // Most use cases prefer bubbling phase, so `false` is almost always used
+
+    // 🔎 INTERVIEW TIP:
+    // Use of `attachEvent` (older IE browsers) is outdated and should be avoided
+
+    // 📌 Common Mouse/Event Properties:
+    // event.type — Type of the event (click, mouseover, etc.)
+    // event.timeStamp — Time when the event occurred
+    // event.preventDefault() — Prevent default browser behavior
+    // event.target — The actual element that triggered the event
+    // event.currentTarget — Element the event listener is attached to
+    // event.clientX / clientY — Mouse position relative to the viewport
+    // event.screenX / screenY — Mouse position relative to the screen
+    // event.altKey / ctrlKey / shiftKey — Keyboard modifiers pressed during event
+    // event.keyCode — (for keyboard events) the code of the pressed key
+
+    // 🎯 Event Bubbling Demo:
+    // Outer <ul> and inner <img> both have listeners
+    // Parent gets triggered if bubbling isn't stopped
+
+    // const images = document.getElementById('images');
+    // images.addEventListener('click', (event) => {
+    //     alert('Clicked inside the <ul>');
+    // }, false);
+
+    // const owl = document.getElementById('owl');
+    // owl.addEventListener('click', (event) => {
+    //     alert('Owl image clicked!');
+    //     event.stopPropagation(); // Prevents bubbling to parent <ul>
+    // }, false);
+
+    // 🔒 Prevent Default Behavior
+    // Clicking the link normally opens Google. `preventDefault()` stops that.
+    // document.getElementById('google').addEventListener('click', (event) => {
+    //     event.preventDefault(); 
+    //     console.log("Google link clicked but navigation prevented");
+    // }, false);
+
+    // 📦 Main Feature: Event Delegation to Remove Images
+    const images = document.querySelector('#images');
+
+    // ✅ Delegated click event on the parent <ul> element
+    // Benefit: No need to attach listeners to each <img>
+    images.addEventListener('click', (event) => {
+        // Check if the clicked target is an image
+        if (event.target.tagName === 'IMG') {
+            const removeItem = event.target.parentNode; // Get the parent <li> of the image
+
+            // 🔸 Method 1: Remove the element completely from DOM
+            // removeItem.remove();
+
+            // 🔸 Method 2: Just hide the element using CSS
+            removeItem.style.display = 'none';
+        }
+    });
+
+    // 🔁 BONUS (commented): Looping through images inside <ul> to log their `src`
+    // for (let i = 0; i < images.children.length; i++) {
+    //     console.log(images.children[i].children[0].src);
+    // }
+</script>
+</html>

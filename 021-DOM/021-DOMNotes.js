@@ -53,3 +53,11 @@ titleArray.forEach((el) => {
     el.style.color = "white"; // 👉 Loop and style text color
     el.style.backgroundColor = "black"; // 👉 Loop and style background
 });
+
+//^ 🔹 Accessing Children
+const parent = document.querySelector(".parent");
+parent.children; // 👉 Returns all direct child elements (HTMLCollection)
+parent.children[0]; // 👉 First child element
+parent.children[1].innerText = "Updated Text"; // 👉 Modify second child
+parent.firstElementChild; // 👉 First child element
+parent.lastElementChild; // 👉 Last child element

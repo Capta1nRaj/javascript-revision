@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    // Interview Quiestion: setTimeouit/SetiNterval/ClearITimeout/ClearTimeinterval.
+
+    let i = 0;
+    let interval = null; // Declare interval variable at the top level
+    const startButton = document.getElementById('start');
+    const stopButton = document.getElementById('stop');
+
+    function startInterval() {
+        if (!interval) {
+            interval = setInterval(() => { console.log(i++) }, 500);
+        }
+    }
+
+    function stopInterval() {
+        if (interval) {
+            clearInterval(interval);
+            interval = null;
+        }
+    }
+
+    // Start interval when page loads
+    startInterval();
+
+    startButton.addEventListener('click', startInterval);
+    stopButton.addEventListener('click', stopInterval);
+</script>
+</html>
