@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+        // 📌 JavaScript: XMLHttpRequest (XHR) with Async Function
+
+        // 🔹 Purpose:
+        // Using the old-school `XMLHttpRequest` method to make HTTP requests (before fetch/axios).
+        // We're using it here inside an `async` function, but XHR itself is callback-based.
+
+        // 🔹 XMLHttpRequest Basics:
+
+        // 👉 Step-by-step:
+        // 1. Create a new instance of XMLHttpRequest
+        // 2. Set up an event listener for `onreadystatechange`
+        // 3. Open a connection to the URL (GET/POST/etc.)
+        // 4. Send the request
+
+        async function fetchData() {
+            const xhr = new XMLHttpRequest(); // ✅ Step 1: Create new XHR object
+        
+            // ✅ Step 2: Handle state change
+            xhr.onreadystatechange = async function () {
+                console.log(xhr.readyState); // Logs 1 → 2 → 3 → 4 (as it changes)
+            
+                // ✅ Step 3: When readyState is 4 (DONE), request finished
+                if (xhr.readyState === 4) {
+                    console.log(this.responseText); // 👉 Full response as string (JSON string here)
+                }
+            };
+        
+            // ✅ Step 4: Open the connection
+            xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true); // true = async
+        
+            // ✅ Step 5: Send the request
+            xhr.send();
+        }
+
+        fetchData();
+
+        // 🔹 `readyState` Values:
+        // 0: UNSENT        → request not initialized
+        // 1: OPENED        → connection established
+        // 2: HEADERS_RECEIVED → request received
+        // 3: LOADING       → processing request
+        // 4: DONE          → request finished and response is ready
+
+        // 🔹 Notes:
+        // - XHR is an older way to make HTTP requests (replaced by fetch API or axios in modern apps)
+        // - Still useful for understanding how async and event-driven code works
+        // - It uses event listeners and callbacks (not Promises)
+        // - `xhr.onreadystatechange` fires multiple times as readyState changes
+</script>
+</html>
