@@ -1,0 +1,58 @@
+<!-- 📘 Notes for Lexical Scope & Closure -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexical Scope & Closure</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    // 🔹 Lexical Scope:
+    // ➤ Scope defined by the position of variables/functions in the code during declaration.
+    // ➤ Inner functions have access to variables in outer functions (and the global scope).
+
+    function main(){
+        const name = "John";
+        console.log("Main:", name); // 👉 John
+
+        function innerOne(){
+            const name = "Jane";
+            console.log("Inner One:", name); // 👉 Jane
+        }
+
+        function innerTwo(){
+            const name = "Doe";
+            console.log("Inner Two:", name); // 👉 Doe
+        }
+
+        innerOne();
+        innerTwo();
+    }
+
+    main();
+
+    // ❌ Error: name is not defined in the global scope
+    console.log("Outer:", typeof name !== 'undefined' ? name : "Not defined");
+
+    // 🔹 Closure:
+    // ➤ A closure is formed when an inner function "remembers" variables from its outer function 
+    //    even after the outer function has finished executing.
+
+    function makeFunc(){
+        const name = "John";
+
+        function displayName(){
+            console.log("Closure:", name); // 👉 John
+        }
+
+        return displayName;
+    }
+
+    const myFunc = makeFunc(); // ➤ makeFunc() has finished, but `displayName` still has access to `name`
+    myFunc(); // ➤ Closure in action
+</script>
+</html>

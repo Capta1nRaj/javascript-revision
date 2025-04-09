@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexical Scope & Closure Example</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .section-title {
+            margin-top: 30px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="section-title">❌ Bad Code (No Closure)</div>
+    <button id="orange-bad">Orange (Bad)</button>
+    <button id="green-bad">Green (Bad)</button>
+
+    <div class="section-title">✅ Good Code (With Closure)</div>
+    <button id="orange">Orange</button>
+    <button id="green">Green</button>
+
+    <script>
+        // ❌ BAD CODE: Repetitive and not reusable
+
+        document.getElementById("orange-bad").onclick = function () {
+            document.body.style.backgroundColor = "orange";
+        };
+
+        document.getElementById("green-bad").onclick = function () {
+            document.body.style.backgroundColor = "green";
+        };
+
+        // 🔴 Problems with above code:
+        // - Repetition
+        // - Not scalable
+        // - Doesn't demonstrate closure
+
+        // ✅ GOOD CODE: Uses Closure & Lexical Scope
+
+        function clickHandler(color) {
+            // Inner function remembers `color` — this is closure
+            return function () {
+                document.body.style.backgroundColor = color;
+            };
+        }
+
+        // Assigning handlers using closure
+        document.getElementById("orange").onclick = clickHandler("orange");
+        document.getElementById("green").onclick = clickHandler("green");
+
+        // ✅ Benefits:
+        // - Reusable function
+        // - Cleaner and scalable code
+        // - Demonstrates how closures "remember" outer variables
+    </script>
+
+</body>
+</html>
