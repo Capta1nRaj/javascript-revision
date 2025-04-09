@@ -1,0 +1,43 @@
+<!-- 📌 JavaScript: `bind()` Method in Classes (with DOM) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Button Clicked</button>
+</body>
+<script>
+    class React {
+        constructor() {
+            this.library = "React";
+            this.server = "https://localhost:3000";
+        
+            // 🔹 Binding the method to preserve `this`
+            document.querySelector("button")
+                .addEventListener("click", this.handleClick.bind(this));
+        }
+    
+        // 🔸 handleClick needs access to `this.server`
+        handleClick() {
+            console.log("Button Clicked");
+            console.log(this.server);
+        }
+    }
+    
+    /*
+    🧠 Why use `bind(this)`?
+    
+    ✅ `this` inside `handleClick` refers to the instance of the class (React)
+    ❌ Without `.bind(this)`, `this` would be undefined or point to the button element
+    ✅ `bind(this)` ensures correct context (React instance) when `handleClick` is triggered by event
+    
+    🔸 `bind()` returns a new function with `this` permanently set to the passed object.
+    */
+
+    const app = new React();
+</script>
+</html>
